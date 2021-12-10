@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:ui';
-
+import 'package:firebase_demo/utils/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:firebase_demo/movies.dart';
 import 'package:firebase_demo/service/movie_service.dart';
 
@@ -63,20 +62,24 @@ class _MovieBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.network(
-          movie.fullImageURL,
-          fit: BoxFit.cover,
-          width: double.infinity,
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: _FrontBanner(text: movie.title),
-        ),
-      ],
+    return InkWell(
+      onTap: () async =>
+          {await Navigator.pushNamed(context, MovieRoutes.movieDetails)},
+      child: Stack(
+        children: [
+          Image.network(
+            movie.fullImageURL,
+            fit: BoxFit.cover,
+            width: double.infinity,
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _FrontBanner(text: movie.title),
+          ),
+        ],
+      ),
     );
   }
 }
